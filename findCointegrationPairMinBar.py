@@ -52,7 +52,7 @@ def loadBarDataFun():
 	for root, folders, files in list_dirs:
 		for f in files:
 			dataDate = float(f[:8])
-			if dataDate >= 20141001 and dataDate <= 20140307:
+			if dataDate >= 20140101 and dataDate <= 20140307:
 				path = os.path.join(root, f)
 				reader = csv.reader(open(path))
 				print path
