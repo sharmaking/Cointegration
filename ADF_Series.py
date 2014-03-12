@@ -3,7 +3,6 @@
 #ADF_Series.py
 from scipy.optimize import leastsq
 import numpy as np
-import matplotlib.pyplot as plt
 
 class C_ADF_Series(list):
 	def __init__(self, needlog, series):
@@ -38,6 +37,8 @@ class C_ADF_Series(list):
 				if num < len(p[1:]):
 					deltaX = deltaX + betaX*betas[num]
 					num = num + 1
+				else:
+					break
 			delta_X.append(deltaX)
 		return delta_X
 	#模型2方法
@@ -54,6 +55,8 @@ class C_ADF_Series(list):
 				if num < len(p[2:]):
 					deltaX = deltaX + betaX*betas[num]
 					num = num + 1
+				else:
+					break
 			delta_X.append(deltaX)
 		return delta_X
 	#模型3方法
@@ -72,6 +75,8 @@ class C_ADF_Series(list):
 				if num < len(p[3:]):
 					deltaX = deltaX + betaX*betas[num]
 					num = num + 1
+				else:
+					break
 			delta_X.append(deltaX)
 			t = t + 1
 		return delta_X
@@ -120,6 +125,8 @@ class C_ADF_Series(list):
 		for i in xrange(len(x)):
 			SSR = SSR + (y[i] - fit_y[i])*(y[i] - fit_y[i])
 			x_SSR = x_SSR + (x[i] - x_mean)*(x[i] - x_mean)
+		if not SSR:
+			return 0
 		return (beta - beta0)*np.sqrt(len(x) - 2)/np.sqrt(SSR/x_SSR)
 	def getResidualsFun(self, p, y, x, func):
 		fx = func(x, p)
@@ -131,10 +138,8 @@ class C_ADF_Series(list):
 	def getSingalIntegrationTime(self):
 		while not self.stationarity:
 			self.modelTest(self.diffSeries[-1])
-		print self.diffRank
-		print self.model_1_param
-		print self.model_2_param
-		print self.model_3_param
+			if self.diffRank > 10:
+				break
 	#模式判断
 	def modelTest(self, series):
 		#验证平稳性

@@ -160,49 +160,50 @@ def main():
 	print a.model_3_param
 
 
-	print "--------------"
-	b = C_ADF_Series(np.diff(a))
-	x = np.arange(len(b))[1:]
-	y = np.diff(b)
+	#print "--------------"
+	#b = C_ADF_Series(np.diff(a))
+	#x = np.arange(len(b))[1:]
+	#y = np.diff(b)
+#
+	#y1 = b.fitting_model_1_fun(b) 
+	#y2 = b.fitting_model_2_fun(b)
+	#y3 = b.fitting_model_3_fun(b)
+#
+	#print b.model_1_param
+	#print b.model_2_param
+	#print b.model_3_param
+#
+#
+	#print "--------------"
+	#c = C_ADF_Series(np.diff(b))
+	#x = np.arange(len(c))[1:]
+	#y = np.diff(c)
+#
+	#y1 = c.fitting_model_1_fun(c) 
+	#y2 = c.fitting_model_2_fun(c)
+	#y3 = c.fitting_model_3_fun(c)
+#
+	#print c.model_1_param
+	#print c.model_2_param
+	#print c.model_3_param
 
-	y1 = b.fitting_model_1_fun(b) 
-	y2 = b.fitting_model_2_fun(b)
-	y3 = b.fitting_model_3_fun(b)
 
-	print b.model_1_param
-	print b.model_2_param
-	print b.model_3_param
-
-
-	print "--------------"
-	c = C_ADF_Series(np.diff(b))
-	x = np.arange(len(c))[1:]
-	y = np.diff(c)
-
-	y1 = c.fitting_model_1_fun(c) 
-	y2 = c.fitting_model_2_fun(c)
-	y3 = c.fitting_model_3_fun(c)
-
-	print c.model_1_param
-	print c.model_2_param
-	print c.model_3_param
-
-
-
-	#y2 = a.model_3_fun(a[:-1], [-223.7,-101.2,0.093,0.733])
-	#y1 = a.model_3_fun(a[:-1], [-161.674, -121.095, 0.11232, 0.807062, -0.23258])
+	x = np.arange(len(a))[1:]
+	y2 = a.model_3_fun(a[:-1], [-223.7,-101.2,0.093,0.733])
+	y1 = a.model_3_fun(a[:-1], [-189.964, -36.745, 0.0554216, 1.82331, -1.18658])
+	y3 = a.fitting_model_3_fun(a)
 
 	#diff = []
 	#for i in xrange(len(y)):
 	#	diff.append(y3[i] - y[i])
 
-	#y_mean = np.mean(y)
-	#R1, R2 = 0, 0
-	#for i in xrange(len(y)):
-	#	R1 = R1 + (y[i] - y1[i])*(y[i] - y1[i])
-	#	R2 = R2 + (y[i] - y_mean)*(y[i] - y_mean)
-	#R = 1- R1/R2
-	#print R
+	y_mean = np.mean(y)
+	R1, R2 = 0, 0
+	for i in xrange(len(y)):
+		R1 = R1 + (y[i] - y1[i])*(y[i] - y1[i])
+		R2 = R2 + (y[i] - y_mean)*(y[i] - y_mean)
+	R = 1- R1/R2
+	print R
 
 
 	l = plt.plot(x, y, "o")
